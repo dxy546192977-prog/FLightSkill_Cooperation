@@ -378,6 +378,55 @@
       text-overflow: ellipsis;
       pointer-events: none;
     }
+    /* ========== Anchor bar (route/date/price) ========== */
+    .hero-anchor-bar {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100%);
+      width: min(100%, var(--layout-max));
+      z-index: 130;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 14px 32px;
+      background: rgba(18, 18, 22, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201, 167, 78, 0.2);
+      opacity: 0;
+      visibility: hidden;
+      transition:
+        opacity 0.35s var(--ease),
+        transform 0.35s var(--ease),
+        visibility 0.35s;
+    }
+    .hero-anchor-bar.is-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+    .anchor-route {
+      font-size: 26px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.92);
+      letter-spacing: 0.5px;
+    }
+    .anchor-sep {
+      font-size: 20px;
+      color: rgba(255, 255, 255, 0.3);
+    }
+    .anchor-date {
+      font-size: 24px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.65);
+    }
+    .anchor-price {
+      font-size: 24px;
+      font-weight: 600;
+      color: #c9a74e;
+    }
 
     .hero-bottom-stack {
       flex: 1 1 auto;
@@ -1018,6 +1067,13 @@
       <svg width="20" height="36" viewBox="0 0 20 36" fill="none" aria-hidden="true"><path d="M18 2L2 18l16 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
     <p class="hero-nav-title">国泰航空 CX857</p>
+    <div class="hero-anchor-bar" id="anchorBar">
+      <span class="anchor-route">北京 → 新加坡</span>
+      <span class="anchor-sep">·</span>
+      <span class="anchor-date">7月15日</span>
+      <span class="anchor-sep">·</span>
+      <span class="anchor-price">商务舱 ¥4,499</span>
+    </div>
     <button type="button" class="hero-share" aria-label="分享">
       <img
         class="hero-share-icon"
@@ -1032,10 +1088,10 @@
 </header>
 
 <div class="sticky-book-bar is-hidden" role="region" aria-label="快速预订">
-  <a class="sticky-book-shell" href="javascript:void(0)" aria-label="立即预订 CX857">
+  <a class="sticky-book-shell" href="javascript:void(0)" aria-label="立即预订 CX857 商务舱 ¥4,499">
     <span class="sticky-book-main">
       <span class="sticky-book-t-strong">立即预订</span>
-      <span class="sticky-book-t-flight">CX857</span>
+      <span class="sticky-book-t-flight">CX857 · <span style="color:#c9a74e;font-weight:600;">¥4,499</span></span>
     </span>
     <span class="sticky-book-orbit" aria-hidden="true">
       <svg viewBox="-3.6 -3.6 27.2 27.2" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
@@ -1442,6 +1498,7 @@
   var currentScene = -1;
 
   var stickyBookBar = document.querySelector('.sticky-book-bar');
+  var anchorBar = document.getElementById('anchorBar');
   var heroSection = document.querySelector('.s-hero');
   var footerBookCta = document.querySelector('.end-strip a.cta-btn');
   var stickyHeroInView = true;
@@ -1457,6 +1514,11 @@
     stickyBookBar.classList.toggle('is-hidden', hide);
   }
 
+  function syncAnchorBar() {
+    if (!anchorBar) return;
+    anchorBar.classList.toggle('is-visible', !stickyHeroInView);
+  }
+
   if (stickyBookBar) {
     if (document.documentElement.classList.contains('figma-capture')) {
       stickyBookBar.classList.remove('is-hidden');
@@ -1467,6 +1529,7 @@
             entries.forEach(function (e) {
               stickyHeroInView = e.isIntersecting;
               syncStickyBookBar();
+              syncAnchorBar();
             });
           },
           { threshold: 0, rootMargin: '0px 0px 0px 0px' }

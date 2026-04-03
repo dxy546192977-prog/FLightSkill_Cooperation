@@ -11,8 +11,8 @@
       --black100: #222;
       --grey50: #999;
       --grey60: #666;
-      --brand: #01f;
-      --brand-light: rgba(0,68,255,0.1);
+      --brand: #1592FB;
+      --brand-light: rgba(21,146,251,0.1);
       --orange100: #ff6b3f;
       --orange10: rgba(255,107,63,0.1);
       --user-bubble: #ebf5ff;
@@ -215,6 +215,37 @@
       width: 670px; background: #fff; border: 2px solid var(--card-border-alpha);
       border-radius: var(--radius-l); padding: var(--card-pad);
       overflow: hidden; display: flex; flex-direction: column; position: relative;
+    }
+    /* ========== Business class card variant ========== */
+    .flight-card--business {
+      border-color: rgba(201,167,78,0.25);
+      border-left: 4px solid #c9a74e;
+      background: linear-gradient(135deg, #fff 0%, rgba(201,167,78,0.04) 100%);
+    }
+    .upsell-tagline {
+      display: flex; align-items: center; gap: 10px;
+      padding: 14px 20px; margin: -28px -28px 20px -28px;
+      background: linear-gradient(90deg, rgba(201,167,78,0.10) 0%, rgba(201,167,78,0.02) 100%);
+      border-bottom: 1px solid rgba(201,167,78,0.12);
+      border-radius: 22px 22px 0 0;
+    }
+    .upsell-tagline-icon { font-size: 20px; flex-shrink: 0; }
+    .upsell-tagline-text {
+      font-size: 26px; font-weight: 600; line-height: 1.4;
+      color: #8b7332; letter-spacing: 0.3px;
+    }
+    .upsell-tagline-text .upsell-price { color: #c9a74e; font-weight: 700; }
+    /* ========== Skeleton loading state ========== */
+    .flight-card--skeleton { pointer-events: none; }
+    .flight-card--skeleton .skeleton-block {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: skeletonShimmer 1.5s ease-in-out infinite;
+      border-radius: 8px;
+    }
+    @keyframes skeletonShimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
     }
     .flight-card-header { display: flex; gap: 12px; align-items: center; width: 100%; }
     .flight-date { font-size: 24px; font-weight: 500; line-height: 1.7; color: var(--grey60); }
@@ -1213,9 +1244,12 @@
       var reviewCount = 260 + (searchParams.seed % 90);
       var positiveRate = 91 + (searchParams.seed % 7);
       var airlinePrefix = business.airline.name === '国泰航空' ? '国泰' : business.airline.name;
-      var reasonHTML = '如果你更在意落地状态，这班商务舱值得考虑。<span class="highlight">多花 ¥1999，可以换来全平躺座椅、更大的腿部空间</span>，以及更从容的长途体验。';
+      var priceDiff = business.price - 2500;
+      var taglineText = '多花 <span class="upsell-price">¥' + priceDiff + '</span>，换来全平躺';
+      var reasonHTML = '如果你更在意落地状态，这班商务舱值得考虑。<span class="highlight">多花 ¥' + priceDiff + '，可以换来全平躺座椅、更大的腿部空间</span>，以及更从容的长途体验。';
       return {
         title: '方案三：舒适商务舱升级',
+        tagline: taglineText,
         reasonHTML: reasonHTML,
         flight: {
           dateText: business.dateText,
@@ -1646,11 +1680,14 @@
 
     function buildPlan3(p) {
       var f = p.flight;
+      var tagline = p.tagline || '多花 ¥1999，换来全平躺';
       return '<div class="plan-section stream-block" style="gap:36px;">'
         + '<div class="plan3-shell"><div class="plan3-intro"><p class="plan-title strong">' + p.title + '</p>'
         + '<p class="plan-reason">' + p.reasonHTML + '</p></div>'
-        /* Business flight card */
-        + '<div class="flight-card">'
+        /* Business flight card — gold accent variant */
+        + '<div class="flight-card flight-card--business">'
+        + '<div class="upsell-tagline"><span class="upsell-tagline-icon">✨</span>'
+        + '<span class="upsell-tagline-text">' + tagline + '</span></div>'
         + '<div class="flight-card-header"><span class="flight-date">' + f.dateText + '</span></div>'
         + '<div class="flight-body"><div class="flight-info-col">'
         + routeHTML(f.depTime, f.depAirport, f.duration, f.arrTime, f.arrAirport, f.lineImg, f.hasLocal)
@@ -1659,7 +1696,7 @@
         + ticketInfoHTML(f.ticketInfo)
         + '</div></div>'
         + '<div class="price-col"><div class="price-group">' + priceHTML(f.price) + discountHTML(f.discount) + '</div>'
-        + '<button class="book-btn">订票</button></div></div></div>'
+        + '<button class="book-btn" style="color:#c9a74e;background:rgba(201,167,78,0.08);">订票</button></div></div></div>'
         /* A350 expandable */
         + '<div class="a350-content-area expanded" data-role="a350Area">'
         + '<div class="a350-inner"><div class="a350-header"><h3 class="a350-title">' + p.a350.title + '</h3>'
@@ -1672,7 +1709,6 @@
         + '<p class="a350-text">' + p.a350.serviceParaHTML + '</p>'
         + '<p class="a350-text">' + p.a350.reviewParaHTML + '</p>'
         + '</div></div><div class="a350-mask"></div></div>'
-        /* Follow link - 已隐藏 */
         /* H5 CTA 跳转按钮 */
         + '<a class="h5-cta-btn" href="' + p.follow.href + '" aria-label="沉浸式体验当前机型">'
         + '<div class="h5-cta-body">'
@@ -1680,10 +1716,35 @@
         + '<span class="h5-cta-sub">点击进入 · 继续预订流程</span>'
         + '</div>'
         + '<div class="h5-cta-arrow">'
-        + '<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 4l6 6-6 6" stroke="#01f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+        + '<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 4l6 6-6 6" stroke="var(--brand)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
         + '</div>'
         + '</a>'
         + '</div></div>';
+    }
+
+    function buildPlan3Skeleton() {
+      return '<div class="plan-section stream-block" style="gap:36px;">'
+        + '<div class="plan3-shell"><div class="plan3-intro">'
+        + '<div class="skeleton-block" style="width:320px;height:36px;margin-bottom:16px;"></div>'
+        + '<div class="skeleton-block" style="width:100%;height:52px;margin-bottom:8px;"></div>'
+        + '<div class="skeleton-block" style="width:80%;height:52px;"></div></div>'
+        + '<div class="flight-card flight-card--business flight-card--skeleton">'
+        + '<div class="upsell-tagline"><span class="upsell-tagline-icon">✨</span>'
+        + '<div class="skeleton-block" style="width:240px;height:28px;"></div></div>'
+        + '<div class="skeleton-block" style="width:140px;height:24px;margin-bottom:16px;"></div>'
+        + '<div style="display:flex;justify-content:space-between;align-items:flex-start;">'
+        + '<div style="display:flex;flex-direction:column;gap:12px;width:420px;">'
+        + '<div style="display:flex;align-items:center;gap:20px;padding-top:24px;">'
+        + '<div class="skeleton-block" style="width:80px;height:48px;"></div>'
+        + '<div class="skeleton-block" style="width:120px;height:24px;"></div>'
+        + '<div class="skeleton-block" style="width:80px;height:48px;"></div></div>'
+        + '<div style="display:flex;gap:8px;align-items:center;">'
+        + '<div class="skeleton-block" style="width:25px;height:25px;border-radius:50%;"></div>'
+        + '<div class="skeleton-block" style="width:160px;height:22px;"></div></div></div>'
+        + '<div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end;">'
+        + '<div class="skeleton-block" style="width:100px;height:36px;"></div>'
+        + '<div class="skeleton-block" style="width:120px;height:52px;border-radius:8px;"></div></div>'
+        + '</div></div></div></div>';
     }
 
     /* ===== Bind A350 toggle (delegated) ===== */
@@ -1792,8 +1853,14 @@
         runtimePlans.plan3.title = '方案三：舒适商务舱升级';
         await revealNode(buildPlanNode(buildPlan1(runtimePlans.plan1)), REVEAL_DELAY_FIRST_TURN);
         await revealNode(buildPlanNode(buildPlan2(runtimePlans.plan2)), REVEAL_DELAY_FIRST_TURN);
+        /* Skeleton → real card transition for business class */
+        var skeletonNode = buildPlanNode(buildPlan3Skeleton());
+        await revealNode(skeletonNode, REVEAL_DELAY_FIRST_TURN);
+        scrollToPlanTitle(skeletonNode);
+        await delay(900);
         var bizNode = buildPlanNode(buildPlan3(runtimePlans.plan3));
-        await revealNode(bizNode, REVEAL_DELAY_FIRST_TURN);
+        skeletonNode.parentNode.replaceChild(bizNode, skeletonNode);
+        bizNode.classList.add('fade-in');
         scrollToPlanTitle(bizNode);
         state.lockScrollFollowing = true;
         state.plan3Shown = true;
