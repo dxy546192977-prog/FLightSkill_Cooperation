@@ -1,4 +1,4 @@
-https://clawhub.ai/mrlyk/holiday-enough<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -7,7 +7,7 @@ https://clawhub.ai/mrlyk/holiday-enough<!DOCTYPE html>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --gold:#C9A84C;--gold-light:#E8C97A;--gold-dim:rgba(201,168,76,0.15);
+  --gold:#69EB4E;--gold-light:#8FF578;--gold-dim:rgba(105,235,78,0.15);
   --dark:#0A0C14;--dark2:#111420;--dark3:#181C2A;
   --text:#F0EDE6;--text-dim:rgba(240,237,230,0.6);--text-muted:rgba(240,237,230,0.35);
   --blue:#4A90D9;--green:#52C97A;--red:#E05C5C;
@@ -33,7 +33,7 @@ body{background:var(--dark);font-family:"PingFang SC","Noto Sans SC","Microsoft 
 .slide.next{transform:translateY(100%)}
 
 /* bg */
-.bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.03) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;z-index:0}
+.bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(105,235,78,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(105,235,78,0.03) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;z-index:0}
 .bg-glow{position:absolute;border-radius:50%;filter:blur(140px);pointer-events:none;z-index:0}
 .inner{position:relative;z-index:1;width:100%;height:100%;display:flex;flex-direction:column;justify-content:center}
 
@@ -49,7 +49,7 @@ body{background:var(--dark);font-family:"PingFang SC","Noto Sans SC","Microsoft 
 
 /* cards */
 .card{background:var(--dark3);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:var(--card-pad)}
-.card-gold{background:linear-gradient(135deg,rgba(201,168,76,0.1),rgba(201,168,76,0.04));border:1px solid rgba(201,168,76,0.25);border-radius:14px;padding:var(--card-pad)}
+.card-gold{background:linear-gradient(135deg,rgba(105,235,78,0.1),rgba(105,235,78,0.04));border:1px solid rgba(105,235,78,0.25);border-radius:14px;padding:var(--card-pad)}
 .card-icon{display:flex;align-items:center;gap:14px}
 .card-icon .icon{font-size:26px;flex-shrink:0}
 .card-icon .label{font-size:15px;font-weight:700;margin-bottom:3px}
@@ -65,13 +65,13 @@ body{background:var(--dark);font-family:"PingFang SC","Noto Sans SC","Microsoft 
 /* num list */
 .num-list{display:flex;flex-direction:column;gap:20px}
 .num-item{display:flex;gap:16px;align-items:flex-start}
-.num-badge{width:32px;height:32px;border-radius:50%;background:var(--gold-dim);border:1px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:var(--gold);flex-shrink:0;margin-top:2px}
+.num-badge{width:32px;height:32px;border-radius:50%;background:var(--gold-dim);border:1px solid rgba(105,235,78,0.3);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:var(--gold);flex-shrink:0;margin-top:2px}
 .num-text{font-size:15px;color:var(--text-dim);line-height:1.7}
 .num-text strong{color:var(--text)}
 
 /* rule table */
 .rule-table{width:100%;border-collapse:separate;border-spacing:0;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.07)}
-.rule-table th{background:rgba(201,168,76,0.08);color:var(--gold);font-size:12px;font-weight:700;letter-spacing:.1em;padding:10px 16px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.07)}
+.rule-table th{background:rgba(105,235,78,0.08);color:var(--gold);font-size:12px;font-weight:700;letter-spacing:.1em;padding:10px 16px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.07)}
 .rule-table td{padding:12px 16px;font-size:13px;color:var(--text-dim);border-bottom:1px solid rgba(255,255,255,0.04);vertical-align:top;line-height:1.6}
 .rule-table tr:last-child td{border-bottom:0}
 .rule-table td:first-child{color:var(--text);font-weight:700;font-family:monospace;white-space:nowrap;width:120px}
@@ -79,7 +79,7 @@ body{background:var(--dark);font-family:"PingFang SC","Noto Sans SC","Microsoft 
 
 /* summary */
 .summary-card{background:linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px 32px;position:relative;overflow:hidden}
-.summary-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--gold),rgba(201,168,76,0.2))}
+.summary-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--gold),rgba(105,235,78,0.2))}
 .sum-row{display:flex;align-items:flex-start;gap:14px;padding:10px 0 10px 16px;border-bottom:1px solid rgba(255,255,255,0.05)}
 .sum-row:last-child{border-bottom:0}
 .sum-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.4);flex-shrink:0;margin-top:6px}
@@ -88,9 +88,59 @@ body{background:var(--dark);font-family:"PingFang SC","Noto Sans SC","Microsoft 
 .sum-text strong{color:var(--text)}
 
 /* video */
-.video-wrap{border-radius:14px;overflow:hidden;border:1px solid rgba(201,168,76,0.2);background:#000;position:relative;flex:1;min-height:0}
+.video-wrap{border-radius:14px;overflow:hidden;border:1px solid rgba(105,235,78,0.2);background:#000;position:relative;flex:1;min-height:0}
 .video-wrap video{width:100%;height:100%;object-fit:contain;display:block}
-.video-label{position:absolute;top:12px;left:12px;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.08em;z-index:2}
+.video-label{position:absolute;top:12px;left:12px;background:rgba(105,235,78,0.15);border:1px solid rgba(105,235,78,0.3);border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.08em;z-index:2}
+
+/* ===== ENHANCEMENTS ===== */
+
+/* card hover */
+.card,.card-gold,.skill-card{transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.card:hover,.card-gold:hover,.skill-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,0.35);border-color:rgba(105,235,78,0.35)}
+
+/* glow breathing */
+.bg-glow{animation:glowPulse 6s ease-in-out infinite alternate}
+@keyframes glowPulse{0%{opacity:.7;transform:scale(1)}100%{opacity:1;transform:scale(1.08)}}
+
+/* stagger entrance animations */
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeSlideRight{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:translateX(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.92)}to{opacity:1;transform:scale(1)}}
+.anim-item{opacity:0}
+.slide.current .anim-item{animation:fadeSlideUp .55s cubic-bezier(.23,1,.32,1) forwards}
+.slide.current .anim-item:nth-child(1){animation-delay:.08s}
+.slide.current .anim-item:nth-child(2){animation-delay:.16s}
+.slide.current .anim-item:nth-child(3){animation-delay:.24s}
+.slide.current .anim-item:nth-child(4){animation-delay:.32s}
+.slide.current .anim-item:nth-child(5){animation-delay:.40s}
+.slide.current .anim-item:nth-child(6){animation-delay:.48s}
+.slide.current .anim-item:nth-child(7){animation-delay:.56s}
+.slide.current .anim-item:nth-child(8){animation-delay:.64s}
+.anim-left{opacity:0}
+.slide.current .anim-left{animation:fadeSlideRight .55s cubic-bezier(.23,1,.32,1) forwards;animation-delay:.1s}
+.anim-scale{opacity:0}
+.slide.current .anim-scale{animation:scaleIn .5s cubic-bezier(.23,1,.32,1) forwards;animation-delay:.2s}
+
+/* progress bar */
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));z-index:200;transition:width .6s cubic-bezier(.4,0,.2,1);box-shadow:0 0 8px rgba(105,235,78,0.4)}
+
+/* page indicator */
+.page-indicator{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;z-index:100;font-family:monospace}
+.page-current{font-size:22px;font-weight:900;color:var(--gold);min-width:28px;text-align:right}
+.page-sep{font-size:13px;color:var(--text-muted);font-weight:300}
+.page-total{font-size:14px;color:var(--text-muted);min-width:28px}
+
+/* scroll hint */
+@keyframes bounceDown{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;z-index:10;opacity:.6;transition:opacity .4s}
+.scroll-hint .arrow{animation:bounceDown 1.6s ease-in-out infinite;font-size:16px;color:var(--gold)}
+.scroll-hint .hint-text{font-size:11px;color:var(--text-muted);letter-spacing:.12em;font-weight:600}
+.slide:not(:first-child) .scroll-hint{display:none}
+
+/* keyboard hint */
+.kbd-hint{position:fixed;bottom:28px;right:28px;display:flex;gap:6px;z-index:100;opacity:.4;transition:opacity .3s}
+.kbd-hint:hover{opacity:.8}
+.kbd{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:22px;padding:0 6px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:4px;font-size:10px;color:var(--text-muted);font-family:monospace}
 
 /* 倾向分 B 页专用 —— 来自推荐规则ppt */
 .wt{display:inline-block;background:rgba(255,255,255,0.06);border-radius:6px;padding:2px 7px;margin:2px 2px;font-size:12px;color:var(--text-dim)}
@@ -134,34 +184,35 @@ body{background:var(--dark);font-family:"PingFang SC","Noto Sans SC","Microsoft 
 <!-- P1 项目背景 -->
 <div class="slide current" style="background:var(--dark)">
   <div class="bg-grid"></div>
-  <div class="bg-glow" style="width:900px;height:900px;background:rgba(201,168,76,0.07);top:-300px;right:-200px"></div>
+  <div class="bg-glow" style="width:900px;height:900px;background:rgba(105,235,78,0.07);top:-300px;right:-200px"></div>
   <div class="inner">
     <div class="g2" style="align-items:center;height:100%">
       <div>
-        <div style="display:inline-flex;align-items:center;gap:10px;background:var(--gold-dim);border:1px solid rgba(201,168,76,0.3);border-radius:30px;padding:7px 18px;font-size:13px;font-weight:600;color:var(--gold);margin-bottom:22px">&#9992; 飞猪 &middot; 机票 Agent</div>
-        <div style="font-size:60px;font-weight:900;line-height:1.08;margin-bottom:18px">机票<br><span class="gold">沉浸式 Agent</span><br>项目讲解</div>
-        <div style="font-size:16px;color:var(--text-dim);line-height:1.8;max-width:520px">国泰航空等高端航司在 OTA 平台有强烈的<strong style="color:var(--text)">前舱展示需求</strong>，<br>我们通过 AI Agent 能力，构建可规模化的<strong style="color:var(--text)">高舱展示与推荐体系</strong>。</div>
-        <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+        <div class="anim-item" style="display:inline-flex;align-items:center;gap:10px;background:var(--gold-dim);border:1px solid rgba(105,235,78,0.3);border-radius:30px;padding:7px 18px;font-size:13px;font-weight:600;color:var(--gold);margin-bottom:22px">&#9992; 飞猪 &middot; 机票 Agent</div>
+        <div class="anim-item" style="font-size:60px;font-weight:900;line-height:1.08;margin-bottom:18px">机票<br><span class="gold">沉浸式 Agent</span><br>项目讲解</div>
+        <div class="anim-item" style="font-size:16px;color:var(--text-dim);line-height:1.8;max-width:520px">国泰航空等高端航司在 OTA 平台有强烈的<strong style="color:var(--text)">前舱展示需求</strong>，<br>我们通过 AI Agent 能力，构建可规模化的<strong style="color:var(--text)">高舱展示与推荐体系</strong>。</div>
+        <div class="anim-item" style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
           <div style="background:rgba(82,201,122,0.12);border:1px solid rgba(82,201,122,0.25);border-radius:8px;padding:6px 14px;font-size:13px;color:var(--green);font-weight:600">公务舱销售 YoY +11.2%</div>
-          <div style="background:var(--gold-dim);border:1px solid rgba(201,168,76,0.3);border-radius:8px;padding:6px 14px;font-size:13px;color:var(--gold);font-weight:600">BD 合作 20&ndash;50w+</div>
+          <div style="background:var(--gold-dim);border:1px solid rgba(105,235,78,0.3);border-radius:8px;padding:6px 14px;font-size:13px;color:var(--gold);font-weight:600">BD 合作 20&ndash;50w+</div>
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:var(--grid-gap)">
-        <div class="card card-icon">
+        <div class="card card-icon anim-item">
           <span class="icon">&#128375;</span>
           <div><div class="label">Flight Data Collector</div><div class="desc">航司数据爬虫 &middot; 结构化事实库</div></div>
         </div>
-        <div class="card card-icon">
+        <div class="card card-icon anim-item">
           <span class="icon">&#128202;</span>
           <div><div class="label">Business Class Recommendations</div><div class="desc">商务舱卡片推荐规则引擎</div></div>
         </div>
-        <div class="card card-icon">
+        <div class="card card-icon anim-item">
           <span class="icon">&#127912;</span>
           <div><div class="label">Flight H5 Creator</div><div class="desc">H5 页面视觉自动生成</div></div>
         </div>
       </div>
     </div>
   </div>
+  <div class="scroll-hint"><div class="arrow">▼</div><div class="hint-text">滚动浏览</div></div>
 </div>
 
 <!-- P2 为什么做 -->
@@ -169,9 +220,9 @@ body{background:var(--dark);font-family:"PingFang SC","Noto Sans SC","Microsoft 
   <div class="bg-grid"></div>
   <div class="bg-glow" style="width:700px;height:700px;background:rgba(74,144,217,0.06);bottom:-200px;left:-100px"></div>
   <div class="inner">
-    <div class="sec-tag">项目动因</div>
-    <div class="sec-title">为什么想做这个 <span class="gold">Skill</span>？</div>
-    <div class="num-list" style="margin-top:8px">
+    <div class="sec-tag anim-item">项目动因</div>
+    <div class="sec-title anim-item">为什么想做这个 <span class="gold">Skill</span>？</div>
+    <div class="num-list anim-item" style="margin-top:8px">
       <div class="num-item">
         <div class="num-badge">01</div>
         <div class="num-text"><strong>重复性工作 &middot; 数据覆盖低</strong><br>数据分散、字段不全，餐食、座椅布局等关键信息无法完整展示；每次上新都需要人工整理，效率极低。</div>
@@ -181,7 +232,7 @@ body{background:var(--dark);font-family:"PingFang SC","Noto Sans SC","Microsoft 
         <div class="num-text"><strong>人工成本高 &middot; 开发周期长</strong><br>过去视觉表达依赖 3D 建模，单次建模成本约 <strong>10 万元</strong>，整个项目周期极长，难以规模化复制。</div>
       </div>
     </div>
-    <div class="card-gold" style="margin-top:32px;display:flex;align-items:center;gap:18px">
+    <div class="card-gold anim-item" style="margin-top:32px;display:flex;align-items:center;gap:18px">
       <span style="font-size:36px">&#128161;</span>
       <div style="font-size:15px;color:var(--text-dim);line-height:1.7">
         <strong style="color:var(--gold);font-size:17px">核心机会</strong>：用 AI Agent 替代人工，实现<strong style="color:var(--text)">数据自动采集 &rarr; 智能推荐 &rarr; 视觉自动生成</strong>的全链路自动化，大幅降低成本并提升覆盖广度。
@@ -196,22 +247,22 @@ body{background:var(--dark);font-family:"PingFang SC","Noto Sans SC","Microsoft 
   <div class="bg-glow" style="width:800px;height:800px;background:rgba(74,144,217,0.05);top:-200px;right:-100px"></div>
   <div class="inner" style="gap:20px">
     <div>
-      <div class="sec-tag">系统架构</div>
-      <div class="sec-title" style="font-size:36px;margin-bottom:8px">从用户输入到 <span class="gold">卡片渲染</span> 全链路</div>
+      <div class="sec-tag anim-item">系统架构</div>
+      <div class="sec-title anim-item" style="font-size:36px;margin-bottom:8px">从用户输入到 <span class="gold">卡片渲染</span> 全链路</div>
     </div>
     <!-- 架构流程：纵向5层 -->
     <div style="display:flex;flex-direction:column;gap:10px;flex:1;justify-content:center">
 
       <!-- 层1：用户输入 -->
       <div style="display:flex;align-items:center;gap:16px">
-        <div style="width:160px;flex-shrink:0;background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(201,168,76,0.04));border:1px solid rgba(201,168,76,0.3);border-radius:12px;padding:12px 16px;text-align:center">
+        <div style="width:160px;flex-shrink:0;background:linear-gradient(135deg,rgba(105,235,78,0.12),rgba(105,235,78,0.04));border:1px solid rgba(105,235,78,0.3);border-radius:12px;padding:12px 16px;text-align:center">
           <div style="font-size:18px;margin-bottom:4px">&#128100;</div>
           <div style="font-size:14px;font-weight:800;color:var(--gold)">用户输入</div>
           <div style="font-size:11px;color:var(--text-muted);margin-top:2px">模糊出行需求</div>
         </div>
         <div style="display:flex;flex-direction:column;align-items:flex-start;gap:2px;flex:1">
-          <div style="height:2px;width:100%;background:linear-gradient(90deg,rgba(201,168,76,0.5),rgba(201,168,76,0.1));border-radius:1px;position:relative">
-            <div style="position:absolute;right:-1px;top:50%;transform:translateY(-50%);color:rgba(201,168,76,0.6);font-size:10px">▼</div>
+          <div style="height:2px;width:100%;background:linear-gradient(90deg,rgba(105,235,78,0.5),rgba(105,235,78,0.1));border-radius:1px;position:relative">
+            <div style="position:absolute;right:-1px;top:50%;transform:translateY(-50%);color:rgba(105,235,78,0.6);font-size:10px">▼</div>
           </div>
         </div>
         <div style="width:340px;flex-shrink:0;background:var(--dark3);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:12px 16px">
@@ -232,7 +283,7 @@ body{background:var(--dark);font-family:"PingFang SC","Noto Sans SC","Microsoft 
       <div style="background:linear-gradient(135deg,rgba(82,201,122,0.1),rgba(82,201,122,0.03));border:1.5px solid rgba(82,201,122,0.35);border-radius:14px;padding:16px 20px;box-shadow:0 0 24px rgba(82,201,122,0.08)">
         <div style="font-size:14px;font-weight:800;color:var(--green);margin-bottom:10px">&#9881;&#65039; Orchestrator（编排层）</div>
         <div style="display:flex;gap:12px">
-          <div style="flex:1;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:10px 14px">
+          <div style="flex:1;background:rgba(105,235,78,0.08);border:1px solid rgba(105,235,78,0.2);border-radius:10px;padding:10px 14px">
             <div style="font-size:12px;font-weight:700;color:var(--gold);margin-bottom:4px">&#128747; FlightAndCabinAPI</div>
             <div style="font-size:11px;color:var(--text-muted);line-height:1.5">经济舱 TopN<br>商务舱报价 / 库存</div>
           </div>
@@ -281,7 +332,7 @@ body{background:var(--dark);font-family:"PingFang SC","Noto Sans SC","Microsoft 
         <div style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:10px">&#128241; 客户端渲染</div>
         <div style="display:flex;gap:10px">
           <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:8px;padding:8px 12px;font-size:12px;color:var(--text-dim)">&#9992;&#65039; 经济舱卡片 × N</div>
-          <div style="flex:2;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.15);border-radius:8px;padding:8px 12px">
+          <div style="flex:2;background:rgba(105,235,78,0.08);border:1px solid rgba(105,235,78,0.15);border-radius:8px;padding:8px 12px">
             <div style="font-size:12px;color:var(--gold);font-weight:700">&#11088; 商务舱 upsell 槽位（第三槽）</div>
             <div style="font-size:11px;color:var(--text-muted);margin-top:3px">Accordion（机型详情 + 图片 + 事实列表）</div>
           </div>
@@ -296,25 +347,25 @@ body{background:var(--dark);font-family:"PingFang SC","Noto Sans SC","Microsoft 
 <!-- P4 Skill 内容 -->
 <div class="slide next" style="background:var(--dark)">
   <div class="bg-grid"></div>
-  <div class="bg-glow" style="width:800px;height:800px;background:rgba(201,168,76,0.06);top:-200px;right:-200px"></div>
+  <div class="bg-glow" style="width:800px;height:800px;background:rgba(105,235,78,0.06);top:-200px;right:-200px"></div>
   <div class="inner">
-    <div class="sec-tag">能力全景</div>
-    <div class="sec-title">Skill 解决什么问题 &middot; <span class="gold">包含什么内容</span></div>
-    <div class="sec-sub">在对话流场景中，作为自动化 Agent，自动生成包含高舱信息的 H5 页面，区别于大模型通用内容，可作为航司合作的商业化窗口。</div>
+    <div class="sec-tag anim-item">能力全景</div>
+    <div class="sec-title anim-item">Skill 解决什么问题 &middot; <span class="gold">包含什么内容</span></div>
+    <div class="sec-sub anim-item">在对话流场景中，作为自动化 Agent，自动生成包含高舱信息的 H5 页面，区别于大模型通用内容，可作为航司合作的商业化窗口。</div>
     <div class="skill-grid">
-      <div class="skill-card">
+      <div class="skill-card anim-item">
         <div class="sk">SKILL 01 &middot; DATA</div>
         <div style="font-size:28px;margin-bottom:4px">&#11015;&#65039;</div>
         <div class="sv">自己爬数据</div>
         <div class="sa">Flight Data Collector &middot; 把官网分散信息抽取成可验证的结构化事实库</div>
       </div>
-      <div class="skill-card">
+      <div class="skill-card anim-item">
         <div class="sk">SKILL 02 &middot; STRATEGY</div>
         <div style="font-size:28px;margin-bottom:4px">&#11015;&#65039;</div>
         <div class="sv">自己想推荐策略</div>
         <div class="sa">Business Class Recommendations &middot; 倾向分 B + 禁推规则，不依赖大模型即兴发挥</div>
       </div>
-      <div class="skill-card">
+      <div class="skill-card anim-item">
         <div class="sk">SKILL 03 &middot; VISUAL</div>
         <div style="font-size:28px;margin-bottom:4px">&#11015;&#65039;</div>
         <div class="sv">自己画图</div>
@@ -327,24 +378,24 @@ body{background:var(--dark);font-family:"PingFang SC","Noto Sans SC","Microsoft 
 <!-- P4 数据爬虫 + 视频 -->
 <div class="slide next" style="background:var(--dark2)">
   <div class="bg-grid"></div>
-  <div class="bg-glow" style="width:700px;height:700px;background:rgba(201,168,76,0.06);bottom:-200px;right:-100px"></div>
+  <div class="bg-glow" style="width:700px;height:700px;background:rgba(105,235,78,0.06);bottom:-200px;right:-100px"></div>
   <div class="inner" style="gap:20px">
     <div>
-      <div class="sec-tag">子 Skill 01 &middot; Flight Data Collector</div>
-      <div class="sec-title">航司数据 <span class="gold">爬虫能力</span></div>
+      <div class="sec-tag anim-item">子 Skill 01 &middot; Flight Data Collector</div>
+      <div class="sec-title anim-item">航司数据 <span class="gold">爬虫能力</span></div>
     </div>
     <div class="g2" style="flex:1;min-height:0;align-items:stretch;overflow:hidden">
       <div class="video-wrap" style="height:100%">
         <div class="video-label">&#127916; DEMO &middot; 阿联酋航空爬取实录</div>
         <video controls preload="metadata" style="width:100%;height:100%;object-fit:contain">
-          <source src="file:///Users/dengxinyang/Desktop/AI·Project/D2C/Qwen/阿联酋航空爬取.mp4" type="video/mp4">
+          <source src="3 其他文件/阿联酋航空爬取.mp4" type="video/mp4">
           您的浏览器不支持 HTML5 视频播放。
         </video>
       </div>
       <div style="display:flex;flex-direction:column;gap:16px;height:100%;overflow:hidden">
-        <div style="flex:1;min-height:0;border-radius:14px;overflow:hidden;border:1px solid rgba(201,168,76,0.15);background:var(--dark3);position:relative">
+        <div style="flex:1;min-height:0;border-radius:14px;overflow:hidden;border:1px solid rgba(105,235,78,0.15);background:var(--dark3);position:relative">
           <div style="position:absolute;top:8px;left:10px;font-size:10px;font-weight:700;color:var(--gold);letter-spacing:.1em;z-index:2;background:rgba(10,12,20,0.7);padding:3px 8px;border-radius:4px">&#128247; 爬取结果</div>
-          <img src="file:///Users/dengxinyang/Desktop/AI·Project/D2C/Qwen/阿联酋航空爬取结果截图.png" alt="阿联酋航空爬取结果截图" style="width:100%;height:100%;object-fit:cover;display:block">
+          <img src="3 其他文件/阿联酋航空爬取结果截图.png" alt="阿联酋航空爬取结果截图" style="width:100%;height:100%;object-fit:cover;display:block">
         </div>
         <div class="card-gold" style="flex-shrink:0">
           <div style="font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.1em;margin-bottom:10px">&#127919; 爬取目标</div>
@@ -379,10 +430,10 @@ body{background:var(--dark);font-family:"PingFang SC","Noto Sans SC","Microsoft 
 <!-- P5 推荐规则 -->
 <div class="slide next" style="background:var(--dark)">
   <div class="bg-grid"></div>
-  <div class="bg-glow" style="width:800px;height:800px;background:rgba(201,168,76,0.07);top:-200px;right:-200px"></div>
+  <div class="bg-glow" style="width:800px;height:800px;background:rgba(105,235,78,0.07);top:-200px;right:-200px"></div>
   <div class="inner">
-    <div class="sec-tag">子 Skill 02 &middot; Business Class Recommendations</div>
-    <div class="sec-title">推荐规则 <span class="gold">判断引擎</span></div>
+    <div class="sec-tag anim-item">子 Skill 02 &middot; Business Class Recommendations</div>
+    <div class="sec-title anim-item">推荐规则 <span class="gold">判断引擎</span></div>
     <div class="g2" style="align-items:stretch">
       <div style="display:flex;flex-direction:column;gap:16px">
         <div class="card-gold">
@@ -408,7 +459,7 @@ body{background:var(--dark);font-family:"PingFang SC","Noto Sans SC","Microsoft 
         <div class="card" style="flex:1">
           <div style="font-size:12px;font-weight:700;color:var(--text-muted);letter-spacing:.1em;margin-bottom:12px">&#127919; 第三槽曝光策略</div>
           <div style="display:flex;flex-direction:column;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.06)">
-            <div style="padding:14px 16px;background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(201,168,76,0.04));display:flex;justify-content:space-between;align-items:center">
+            <div style="padding:14px 16px;background:linear-gradient(135deg,rgba(105,235,78,0.12),rgba(105,235,78,0.04));display:flex;justify-content:space-between;align-items:center">
               <div><div style="font-size:14px;font-weight:700;color:var(--gold)">B &ge; 20 &middot; 高意向</div><div style="font-size:12px;color:var(--text-dim);margin-top:3px">优先展示，可放宽价差阈值</div></div>
               <span style="font-size:20px">&#127937;</span>
             </div>
@@ -433,7 +484,7 @@ body{background:var(--dark);font-family:"PingFang SC","Noto Sans SC","Microsoft 
               <span style="font-size:11px;font-weight:700;color:var(--red);flex-shrink:0">&#9313; 短航程</span>
               <span style="font-size:12px;color:var(--text-dim)">航段 &lt; 2h，整体模块不渲染</span>
             </div>
-            <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:rgba(201,168,76,0.06);border-radius:8px;border:1px solid rgba(201,168,76,0.15)">
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:rgba(105,235,78,0.06);border-radius:8px;border:1px solid rgba(105,235,78,0.15)">
               <span style="font-size:11px;font-weight:700;color:var(--gold);flex-shrink:0">&#9314; B 分策略</span>
               <span style="font-size:12px;color:var(--text-dim)">计算 B 值，决定第三槽曝光等级</span>
             </div>
@@ -447,10 +498,10 @@ body{background:var(--dark);font-family:"PingFang SC","Noto Sans SC","Microsoft 
 <!-- P6 倾向分 B 算法（来自推荐规则ppt第3页） -->
 <div class="slide next" style="background:var(--dark)">
   <div class="bg-grid"></div>
-  <div class="bg-glow" style="width:800px;height:800px;background:rgba(201,168,76,0.07);top:-200px;right:-200px"></div>
+  <div class="bg-glow" style="width:800px;height:800px;background:rgba(105,235,78,0.07);top:-200px;right:-200px"></div>
   <div class="inner">
-    <div class="sec-tag">推荐规则详解 &middot; 倾向分</div>
-    <div class="sec-title">倾向分 <span class="gold">B</span> 算法</div>
+    <div class="sec-tag anim-item">推荐规则详解 &middot; 倾向分</div>
+    <div class="sec-title anim-item">倾向分 <span class="gold">B</span> 算法</div>
     <div class="g2" style="align-items:stretch">
       <div style="display:flex;flex-direction:column;gap:16px">
         <div class="sr" style="flex:1;background:var(--dark3);border:1px solid rgba(255,255,255,0.06)">
@@ -513,11 +564,11 @@ body{background:var(--dark);font-family:"PingFang SC","Noto Sans SC","Microsoft 
   <div class="bg-grid"></div>
   <div class="bg-glow" style="width:700px;height:700px;background:rgba(82,201,122,0.05);bottom:-200px;left:-100px"></div>
   <div class="inner">
-    <div class="sec-tag">推荐规则详解 &middot; 第三槽</div>
-    <div class="sec-title">第三槽 <span class="gold">曝光策略</span></div>
+    <div class="sec-tag anim-item">推荐规则详解 &middot; 第三槽</div>
+    <div class="sec-title anim-item">第三槽 <span class="gold">曝光策略</span></div>
     <div class="g2">
       <div style="border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);display:flex;flex-direction:column">
-        <div class="tb" style="flex:1;background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(201,168,76,0.04))">
+        <div class="tb" style="flex:1;background:linear-gradient(135deg,rgba(105,235,78,0.12),rgba(105,235,78,0.04))">
           <div class="tl"><div class="ts gold">B &ge; 20</div><div class="tlb">高意向</div></div>
           <div class="tr"><div class="ta gold">优先展示商务舱</div><div class="td">可放宽价差阈值，主动推荐第三槽；排序分 R 显著提升</div></div>
           <div class="ti">&#127937;</div>
@@ -542,7 +593,7 @@ body{background:var(--dark);font-family:"PingFang SC","Noto Sans SC","Microsoft 
               <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
                 <span class="chip" style="background:rgba(74,144,217,0.15);color:var(--blue)">红眼 +20</span>
                 <span style="font-size:11px;color:var(--text-muted)">+</span>
-                <span class="chip" style="background:rgba(201,168,76,0.15);color:var(--gold)">老人 +25</span>
+                <span class="chip" style="background:rgba(105,235,78,0.15);color:var(--gold)">老人 +25</span>
                 <span style="font-size:11px;color:var(--text-muted)">=</span>
                 <span style="font-size:15px;font-weight:900;color:var(--gold)">B = 45</span>
               </div>
@@ -584,9 +635,9 @@ body{background:var(--dark);font-family:"PingFang SC","Noto Sans SC","Microsoft 
   <div class="bg-grid"></div>
   <div class="bg-glow" style="width:700px;height:700px;background:rgba(82,201,122,0.05);bottom:-200px;left:-100px"></div>
   <div class="inner">
-    <div class="sec-tag">子 Skill 03 &middot; Flight H5 Creator</div>
-    <div class="sec-title">H5 页面 <span class="gold">自动生成</span></div>
-    <div class="sec-sub">自动生成完整展示页面，区别于大模型通用内容，可作为 Fly.AI 机票 Agent 的行业特色能力。</div>
+    <div class="sec-tag anim-item">子 Skill 03 &middot; Flight H5 Creator</div>
+    <div class="sec-title anim-item">H5 页面 <span class="gold">自动生成</span></div>
+    <div class="sec-sub anim-item">自动生成完整展示页面，区别于大模型通用内容，可作为 Fly.AI 机票 Agent 的行业特色能力。</div>
     <div class="g2" style="align-items:stretch">
       <div style="display:flex;flex-direction:column;gap:var(--grid-gap)">
         <div class="card" style="flex:1">
@@ -604,16 +655,16 @@ body{background:var(--dark);font-family:"PingFang SC","Noto Sans SC","Microsoft 
           <div style="font-size:14px;color:var(--text-dim);line-height:1.7">主容器编排子页，统一接管<strong style="color:var(--text)">资源预加载、脚本顺序与滚动状态</strong>，确保页面流畅渲染。</div>
         </div>
       </div>
-      <div class="card" style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:20px;background:linear-gradient(135deg,rgba(201,168,76,0.06),rgba(201,168,76,0.02))">
+      <div class="card" style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:20px;background:linear-gradient(135deg,rgba(105,235,78,0.06),rgba(105,235,78,0.02))">
         <div style="font-size:64px">&#127912;</div>
         <div style="text-align:center">
           <div style="font-size:18px;font-weight:800;color:var(--text);margin-bottom:8px">从数据到页面，全自动</div>
           <div style="font-size:13px;color:var(--text-dim);line-height:1.7;max-width:280px">输入航司 + 机型，自动调用 CabinKB 数据，生成完整 H5 展示页，无需人工介入。</div>
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
-          <span style="background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.25);border-radius:6px;padding:4px 12px;font-size:12px;color:var(--gold);font-weight:600">国泰航空</span>
-          <span style="background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.25);border-radius:6px;padding:4px 12px;font-size:12px;color:var(--gold);font-weight:600">阿联酋航空</span>
-          <span style="background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.25);border-radius:6px;padding:4px 12px;font-size:12px;color:var(--gold);font-weight:600">新加坡航空</span>
+          <span style="background:rgba(105,235,78,0.12);border:1px solid rgba(105,235,78,0.25);border-radius:6px;padding:4px 12px;font-size:12px;color:var(--gold);font-weight:600">国泰航空</span>
+          <span style="background:rgba(105,235,78,0.12);border:1px solid rgba(105,235,78,0.25);border-radius:6px;padding:4px 12px;font-size:12px;color:var(--gold);font-weight:600">阿联酋航空</span>
+          <span style="background:rgba(105,235,78,0.12);border:1px solid rgba(105,235,78,0.25);border-radius:6px;padding:4px 12px;font-size:12px;color:var(--gold);font-weight:600">新加坡航空</span>
         </div>
       </div>
     </div>
@@ -623,10 +674,10 @@ body{background:var(--dark);font-family:"PingFang SC","Noto Sans SC","Microsoft 
 <!-- P9 总结 -->
 <div class="slide next" style="background:var(--dark)">
   <div class="bg-grid"></div>
-  <div class="bg-glow" style="width:900px;height:900px;background:rgba(201,168,76,0.07);top:-300px;right:-200px"></div>
+  <div class="bg-glow" style="width:900px;height:900px;background:rgba(105,235,78,0.07);top:-300px;right:-200px"></div>
   <div class="inner">
-    <div class="sec-tag">项目总结</div>
-    <div class="sec-title" style="margin-bottom:28px">从人工到 <span class="gold">AI 自动化</span></div>
+    <div class="sec-tag anim-item">项目总结</div>
+    <div class="sec-title anim-item" style="margin-bottom:28px">从人工到 <span class="gold">AI 自动化</span></div>
     <div class="summary-card">
       <div class="sum-row">
         <div class="sum-dot"></div>
@@ -671,16 +722,16 @@ body{background:var(--dark);font-family:"PingFang SC","Noto Sans SC","Microsoft 
 <!-- P10 H5效果演示 · 千问植入高舱H5 -->
 <div class="slide next" style="background:var(--dark)">
   <div class="bg-grid"></div>
-  <div class="bg-glow" style="width:900px;height:900px;background:rgba(201,168,76,0.07);top:-300px;right:-200px"></div>
+  <div class="bg-glow" style="width:900px;height:900px;background:rgba(105,235,78,0.07);top:-300px;right:-200px"></div>
   <div class="inner" style="gap:20px">
     <div>
-      <div class="sec-tag">子 Skill 03 &middot; Flight H5 Creator &middot; 效果演示</div>
-      <div class="sec-title">千问植入 <span class="gold">高舱 H5</span> 实录</div>
+      <div class="sec-tag anim-item">子 Skill 03 &middot; Flight H5 Creator &middot; 效果演示</div>
+      <div class="sec-title anim-item">千问植入 <span class="gold">高舱 H5</span> 实录</div>
     </div>
     <div class="video-wrap" style="flex:1;min-height:0">
       <div class="video-label">&#127916; DEMO &middot; 千问植入高舱 H5 效果</div>
       <video controls preload="metadata" style="width:100%;height:100%;object-fit:contain">
-        <source src="file:///Users/dengxinyang/Desktop/AI·Project/D2C/Qwen/3 其他文件/千问植入高舱H5.mp4" type="video/mp4">
+        <source src="3 其他文件/千问植入高舱H5.mp4" type="video/mp4">
         您的浏览器不支持 HTML5 视频播放。
       </video>
     </div>
@@ -689,12 +740,44 @@ body{background:var(--dark);font-family:"PingFang SC","Noto Sans SC","Microsoft 
 
 </div>
 
+<!-- Progress bar -->
+<div class="progress-bar" id="progressBar" style="width:calc(100% / 11)"></div>
+
+<!-- Page indicator -->
+<div class="page-indicator">
+  <span class="page-current" id="pageCurrent">01</span>
+  <span class="page-sep">/</span>
+  <span class="page-total">11</span>
+</div>
+
+<!-- Keyboard hint -->
+<div class="kbd-hint">
+  <span class="kbd">↑</span>
+  <span class="kbd">↓</span>
+  <span class="kbd">Space</span>
+</div>
+
 <script>
 const TOTAL = 11;
 let current = 0;
 let animating = false;
 const slides = document.querySelectorAll('.slide');
 const navItems = document.querySelectorAll('.sn-item');
+const progressBar = document.getElementById('progressBar');
+const pageCurrent = document.getElementById('pageCurrent');
+
+function resetAnimItems(slideEl) {
+  slideEl.querySelectorAll('.anim-item,.anim-left,.anim-scale').forEach(el => {
+    el.style.animation = 'none';
+    el.offsetHeight;
+    el.style.animation = '';
+  });
+}
+
+function updateIndicators(idx) {
+  progressBar.style.width = ((idx + 1) / TOTAL * 100) + '%';
+  pageCurrent.textContent = String(idx + 1).padStart(2, '0');
+}
 
 function goTo(idx) {
   if (animating || idx === current || idx < 0 || idx >= TOTAL) return;
@@ -706,6 +789,8 @@ function goTo(idx) {
   slides[idx].classList.add('current');
   navItems[current].classList.remove('active');
   navItems[idx].classList.add('active');
+  resetAnimItems(slides[idx]);
+  updateIndicators(idx);
   current = idx;
   setTimeout(() => { animating = false; }, 650);
 }
