@@ -1,5 +1,5 @@
 ---
-name: flight-cabin-recommendation
+name: flight-skill-cooperation
 version: 1.0.0
 description: |
   对话流航班推荐与商务舱展示系统。提供Schema定义、编排层、CabinKB机型知识库，
@@ -8,7 +8,7 @@ author: Fliggy Team
 license: MIT
 ---
 
-# Flight Cabin Recommendation
+# Flight Skill Cooperation
 
 对话流商务舱推荐系统的参考实现，包含Schema定义、编排层、CabinKB机型知识库。
 
@@ -34,7 +34,7 @@ flight-cabin-recommendation/
 ### 1. CabinKB 机型知识库
 
 ```javascript
-import { getCabinPresentation } from 'flight-cabin-recommendation/cabin-kb';
+import { getCabinPresentation } from './cabin-kb/index.js';
 
 const cabin = getCabinPresentation({
   airlineCode: 'CX',      // 航司代码
@@ -54,7 +54,7 @@ const cabin = getCabinPresentation({
 ### 2. 编排层 - 槽位策略
 
 ```javascript
-import { evaluateIntentSignals, shouldAttachBusinessSlot } from 'flight-cabin-recommendation/orchestrator';
+import { evaluateIntentSignals, shouldAttachBusinessSlot } from './orchestrator/index.js';
 
 // 分析用户意图
 const signals = evaluateIntentSignals('帮我推荐到北京的机票');
@@ -72,17 +72,41 @@ const shouldShow = shouldAttachBusinessSlot(
 - 舒适信号（舒服/平躺/老人）：提升权重
 - 价差>8倍：自动隐藏
 
-### 3. Schema 定义
+### 3. 编排层 - 数据构建
 
 ```javascript
-// FlightCard Schema
-import flightCardSchema from 'flight-cabin-recommendation/schemas/flight-card' assert { type: 'json' };
+import { buildFlightCard, buildCabinUpsell, toSSESequence } from './orchestrator/index.js';
 
-// CabinUpsell Schema  
-import cabinUpsellSchema from 'flight-cabin-recommendation/schemas/cabin-upsell' assert { type: 'json' };
+// 构建航班卡片
+const flightCard = buildFlightCard({
+  id: 'fc-1',
+  slotKey: 'economy_direct',
+  slotTitle: '方案一：直飞最低价',
+  route: { originCode: 'HGH', destCode: 'PKX' },
+  departDate: '2025-04-06',
+  priceCny: 624,
+  cabinClass: 'Y',
+  airline: { code: 'CX', name: '国泰航空' },
+  offerId: 'offer-1',
+  searchId: 'srch-1'
+});
+
+// 构建舱位升级数据
+const cabinUpsell = buildCabinUpsell(
+  { id: 'cabin-1', flightCardId: 'fc-1', cta, searchId },
+  cabinKbResult
+);
+
+// 转换为SSE事件序列
+const events = toSSESequence({
+  searchId: 'srch-1',
+  introText: '为你找到以下方案：',
+  flightCards: [flightCard],
+  cabinUpsells: [cabinUpsell]
+});
 ```
 
-## 数据结构
+## Schema 定义
 
 ### FlightCard (航班卡片)
 

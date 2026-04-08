@@ -1,9 +1,10 @@
 {
-  "name": "flight-cabin-recommendation",
+  "name": "flight-skill-cooperation",
   "version": "1.0.0",
   "type": "module",
   "description": "对话流航班推荐与商务舱展示系统。提供Schema定义、编排层、CabinKB机型知识库的完整参考实现。",
   "exports": {
+    ".": "./orchestrator/index.js",
     "./orchestrator": "./orchestrator/index.js",
     "./cabin-kb": "./cabin-kb/index.js",
     "./schemas/flight-card": "./schemas/flight-card.schema.json",
