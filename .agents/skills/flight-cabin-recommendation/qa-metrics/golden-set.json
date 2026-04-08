@@ -1,0 +1,79 @@
+{
+  "description": "固定场景用于 schema 与事实字段抽检；运行 validate-blocks.js 校验",
+  "scenarios": [
+    {
+      "id": "vague_beijing",
+      "userText": "帮我推荐到北京的机票",
+      "expectAttachBusinessUpsell": true,
+      "expectAircraftKey": "CX|A350-1000",
+      "minFlightCards": 3,
+      "minCabinUpsells": 1
+    },
+    {
+      "id": "budget_user",
+      "userText": "我要最便宜的机票",
+      "expectAttachBusinessUpsell": false,
+      "minFlightCards": 2,
+      "minCabinUpsells": 0
+    }
+  ],
+  "snapshot": {
+    "searchId": "srch-golden-demo",
+    "flightCards": [
+      {
+        "id": "fc-economy_direct-demo",
+        "slotKey": "economy_direct",
+        "slotTitle": "方案一：直飞最低价",
+        "recommendReason": "直飞省时",
+        "route": { "originCode": "HGH", "destCode": "PKX", "originCity": "杭州", "destCity": "北京大兴" },
+        "departDate": "2025-04-06",
+        "departTime": "07:30",
+        "arriveTime": "09:50",
+        "durationMinutes": 140,
+        "cabinClass": "Y",
+        "cabinLabel": "经济舱",
+        "priceCny": 624,
+        "currency": "CNY",
+        "airline": { "code": "CX", "name": "国泰航空" },
+        "tags": ["直飞"],
+        "offerId": "offer-y-dir",
+        "searchId": "srch-golden-demo"
+      }
+    ],
+    "cabinUpsell": {
+      "id": "cabin-demo",
+      "flightCardId": "fc-business_upsell-demo",
+      "aircraftKey": "CX|A350-1000",
+      "facts": {
+        "businessSeats": 46,
+        "score": 4.62,
+        "reviewCount": 480
+      },
+      "images": [
+        {
+          "url": "https://placehold.co/800x450/2d1b4e/e8e0ff/png?text=CX",
+          "alt": "国泰商务舱",
+          "width": 800,
+          "height": 450,
+          "contentHash": "demo-cx-a350-biz"
+        }
+      ],
+      "accordion": [
+        {
+          "sectionId": "cabin",
+          "title": "豪华商务舱",
+          "defaultExpanded": true,
+          "bullets": ["180° 全平躺座椅"],
+          "imageUrl": "https://placehold.co/800x450/2d1b4e/e8e0ff/png?text=CX"
+        }
+      ],
+      "cta": {
+        "label": "查看更多商务舱优选",
+        "href": "https://example.com/flights?cabin=J",
+        "offerId": "offer-j-dir",
+        "searchId": "srch-golden-demo"
+      },
+      "searchId": "srch-golden-demo"
+    }
+  }
+}

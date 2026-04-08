@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://qwen.local/schemas/sse-event-envelope.schema.json",
+  "title": "ChatFlightSSEEnvelope",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["event", "data"],
+      "properties": {
+        "event": { "const": "message.delta" },
+        "data": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "text"],
+          "properties": {
+            "type": { "const": "text" },
+            "text": { "type": "string" }
+          }
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["event", "data"],
+      "properties": {
+        "event": { "const": "message.block" },
+        "data": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["blockType", "blockId", "payload"],
+          "properties": {
+            "blockType": {
+              "type": "string",
+              "enum": ["FlightCard", "CabinUpsell"]
+            },
+            "blockId": { "type": "string" },
+            "payload": { "type": "object" }
+          }
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["event", "data"],
+      "properties": {
+        "event": { "const": "message.done" },
+        "data": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["reason"],
+          "properties": {
+            "reason": { "type": "string", "enum": ["complete", "error"] },
+            "searchId": { "type": "string" }
+          }
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["event", "data"],
+      "properties": {
+        "event": { "const": "analytics.beacon" },
+        "data": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "searchId"],
+          "properties": {
+            "name": { "type": "string" },
+            "searchId": { "type": "string" },
+            "props": { "type": "object" }
+          }
+        }
+      }
+    }
+  ]
+}

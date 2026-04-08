@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://qwen.local/schemas/flight-card.schema.json",
+  "title": "FlightCard",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "slotKey",
+    "slotTitle",
+    "route",
+    "departDate",
+    "cabinClass",
+    "priceCny",
+    "offerId",
+    "searchId"
+  ],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "slotKey": {
+      "type": "string",
+      "enum": ["economy_direct", "economy_transfer", "business_upsell"]
+    },
+    "slotTitle": { "type": "string", "description": "例如：方案一：直飞最低价" },
+    "recommendReason": { "type": "string", "description": "一句推荐理由，可由模型或模板生成" },
+    "route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["originCode", "destCode"],
+      "properties": {
+        "originCode": { "type": "string" },
+        "destCode": { "type": "string" },
+        "originCity": { "type": "string" },
+        "destCity": { "type": "string" }
+      }
+    },
+    "departDate": { "type": "string", "description": "ISO 日期 YYYY-MM-DD" },
+    "departTime": { "type": "string", "description": "HH:mm" },
+    "arriveTime": { "type": "string", "description": "HH:mm" },
+    "durationMinutes": { "type": "integer", "minimum": 0 },
+    "cabinClass": { "type": "string", "enum": ["Y", "W", "J", "C", "F"] },
+    "cabinLabel": { "type": "string", "description": "展示用：经济舱 / 商务舱" },
+    "priceCny": { "type": "number", "minimum": 0 },
+    "currency": { "type": "string", "default": "CNY" },
+    "airline": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "code": { "type": "string" },
+        "name": { "type": "string" },
+        "logoUrl": { "type": "string", "format": "uri" }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "legs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["originCode", "destCode"],
+        "properties": {
+          "originCode": { "type": "string" },
+          "destCode": { "type": "string" },
+          "departTime": { "type": "string" },
+          "arriveTime": { "type": "string" },
+          "flightNo": { "type": "string" }
+        }
+      }
+    },
+    "offerId": { "type": "string" },
+    "searchId": { "type": "string" }
+  }
+}

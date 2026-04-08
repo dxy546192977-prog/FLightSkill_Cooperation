@@ -1,0 +1,85 @@
+{
+  "CX|A350-1000": {
+    "airlineCode": "CX",
+    "equipment": "A350-1000",
+    "facts": {
+      "businessSeats": 46,
+      "seatWidthIn": 20,
+      "seatWidthCm": 51,
+      "pitchMinIn": 45,
+      "pitchMaxIn": 75,
+      "lieFlatDegrees": 180,
+      "score": 4.62,
+      "reviewCount": 480,
+      "amenities": ["Wi-Fi", "USB 电源", "机上娱乐", "个人设备充电"]
+    },
+    "images": [
+      {
+        "url": "https://placehold.co/800x450/2d1b4e/e8e0ff/png?text=Business+Cabin+CX+A350",
+        "alt": "国泰 A350-1000 商务舱示意",
+        "width": 800,
+        "height": 450,
+        "contentHash": "demo-cx-a350-biz"
+      }
+    ],
+    "accordionTemplates": [
+      {
+        "sectionId": "aircraft",
+        "title": "机型详情",
+        "defaultExpanded": false,
+        "bullets": ["空客 A350-1000", "宽体客机", "商务舱 46 座"]
+      },
+      {
+        "sectionId": "cabin",
+        "title": "豪华商务舱",
+        "defaultExpanded": true,
+        "bullets": [
+          "180° 全平躺座椅",
+          "座椅宽度约 20 英寸（51cm）",
+          "间距约 45–75 英寸",
+          "综合评分 4.62/5（480 条评论）"
+        ],
+        "usePrimaryImage": true
+      },
+      {
+        "sectionId": "ife",
+        "title": "娱乐系统",
+        "defaultExpanded": false,
+        "bullets": ["个人屏幕", "点播娱乐", "降噪耳机（以航司实际配备为准）"]
+      }
+    ]
+  },
+  "MU|A330-300": {
+    "airlineCode": "MU",
+    "equipment": "A330-300",
+    "facts": {
+      "lieFlatDegrees": 180,
+      "score": 4.2,
+      "reviewCount": 120
+    },
+    "images": [
+      {
+        "url": "https://placehold.co/800x450/0f131a/ffffff/png?text=MU+A330+Business",
+        "alt": "东航 A330 商务舱示意",
+        "width": 800,
+        "height": 450,
+        "contentHash": "demo-mu-a330-biz"
+      }
+    ],
+    "accordionTemplates": [
+      {
+        "sectionId": "aircraft",
+        "title": "机型详情",
+        "defaultExpanded": false,
+        "bullets": ["空客 A330-300", "宽体客机"]
+      },
+      {
+        "sectionId": "cabin",
+        "title": "商务舱体验",
+        "defaultExpanded": true,
+        "bullets": ["180° 平躺（具体布局以当日执飞为准）", "评分 4.2/5（120 条评论）"],
+        "usePrimaryImage": true
+      }
+    ]
+  }
+}

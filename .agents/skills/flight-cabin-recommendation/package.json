@@ -1,0 +1,25 @@
+{
+  "name": "flight-cabin-recommendation",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "对话流航班推荐与商务舱展示系统。提供Schema定义、编排层、SSE流式输出、CabinKB机型知识库、槽位策略和QA校验的完整参考实现。",
+  "scripts": {
+    "start": "node orchestrator/server.js",
+    "validate": "node qa-metrics/validate-blocks.js"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  },
+  "keywords": [
+    "flight",
+    "cabin",
+    "recommendation",
+    "sse",
+    "business-class",
+    "airline",
+    "aircraft"
+  ],
+  "author": "Fliggy Team",
+  "license": "MIT"
+}

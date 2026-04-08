@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>通义千问 · 机票 Block 流演示</title>
+  <style>
+    :root {
+      --bg: #f7f8fa;
+      --text: #0f131a;
+      --muted: #666;
+      --price: #ff5533;
+      --brand: #6644ff;
+      --card: #fff;
+      --border: #eee;
+      --acc-bg: #f2f3f7;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.45;
+    }
+    .page { max-width: 420px; margin: 0 auto; min-height: 100vh; padding: 12px 14px 120px; }
+    h1 { font-size: 17px; font-weight: 600; margin: 0 0 10px; }
+    .toolbar {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;
+    }
+    input[type="text"] {
+      flex: 1 1 200px; padding: 10px 12px; border: 1px solid var(--border);
+      border-radius: 10px; font-size: 14px;
+    }
+    button {
+      padding: 10px 14px; border: none; border-radius: 10px;
+      background: var(--brand); color: #fff; font-weight: 600; cursor: pointer;
+    }
+    button.secondary { background: #e8e8f0; color: #333; }
+    .hint { font-size: 12px; color: var(--muted); margin-top: 6px; }
+    .stream-text {
+      white-space: pre-wrap; margin: 8px 0 14px; font-size: 15px; line-height: 1.55;
+    }
+    .plan { margin-bottom: 18px; }
+    .plan-title { font-size: 16px; font-weight: 600; margin: 0 0 6px; }
+    .plan-reason { font-size: 14px; color: var(--muted); margin: 0 0 10px; }
+    .flight-card {
+      background: var(--card); border-radius: var(--radius); padding: 12px 14px;
+      border: 1px solid var(--border); box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .flight-row {
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;
+    }
+    .route { font-size: 15px; font-weight: 600; }
+    .times { font-size: 14px; color: var(--muted); margin-top: 4px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .tag {
+      font-size: 11px; padding: 3px 8px; border-radius: 999px;
+      background: #eef0ff; color: #445;
+    }
+    .price { font-size: 20px; font-weight: 700; color: var(--price); }
+    .cabin { font-size: 12px; color: var(--muted); }
+    .cabin-wrap { text-align: right; }
+    .notice {
+      margin-top: 10px; padding: 8px 10px; background: #fff8f0;
+      border-radius: 8px; font-size: 12px; color: #8a4b18;
+    }
+    .accordion { margin-top: 10px; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
+    .acc-item + .acc-item { border-top: 1px solid var(--border); }
+    .acc-head {
+      width: 100%; text-align: left; padding: 12px 14px; border: none; background: var(--acc-bg);
+      font-size: 14px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between;
+    }
+    .acc-body { padding: 0 14px 12px; background: #fafbff; display: none; }
+    .acc-body.open { display: block; }
+    .acc-body img {
+      width: 100%; height: auto; border-radius: 10px; margin-top: 8px;
+      background: #e8e8ee;
+    }
+    .acc-body ul { margin: 8px 0 0; padding-left: 18px; font-size: 13px; color: #333; }
+    .cta {
+      display: block; width: 100%; margin-top: 12px; padding: 12px; text-align: center;
+      border-radius: 12px; background: linear-gradient(180deg, #eef0ff, #e4e6ff);
+      color: #1a1a33; font-weight: 600; text-decoration: none; border: 1px solid #dde0ff;
+    }
+    .log { font-size: 11px; color: #999; margin-top: 20px; word-break: break-all; }
+    .error { color: #c00; font-size: 13px; margin: 8px 0; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1>机票推荐 · 结构化 Block 演示</h1>
+    <div class="toolbar">
+      <input id="q" type="text" placeholder="用户说法，例如：帮我推荐到北京的机票" value="帮我推荐到北京的机票" />
+      <button type="button" id="go">拉取 SSE</button>
+      <button type="button" id="budget" class="secondary">模拟：最便宜</button>
+    </div>
+    <p class="hint">先运行 <code>node orchestrator/server.js</code>，本页默认请求同源 <code>/api/stream</code>。</p>
+    <div id="err" class="error" hidden></div>
+    <div id="text" class="stream-text"></div>
+    <div id="blocks"></div>
+    <div id="log" class="log"></div>
+  </div>
+  <script>
+(function () {
+  const ALLOWED_IMAGE_HOSTS = new Set([
+    "placehold.co",
+    "localhost",
+    "127.0.0.1",
+    "img.alicdn.com",
+    "gw.alicdn.com",
+    "img.alicdn.net",
+  ]);
+
+  function isImageUrlAllowed(url) {
+    try {
+      const u = new URL(url, window.location.href);
+      if (u.protocol !== "https:" && u.protocol !== "http:") return false;
+      return ALLOWED_IMAGE_HOSTS.has(u.hostname);
+    } catch {
+      return false;
+    }
+  }
+
+  function sanitizeImageUrl(url) {
+    if (!url || !isImageUrlAllowed(url)) return null;
+    return url;
+  }
+
+  function track(name, props) {
+    const line = "[analytics] " + name + " " + JSON.stringify(props || {});
+    console.log(line);
+    const log = document.getElementById("log");
+    log.textContent = (log.textContent ? log.textContent + "\n" : "") + line;
+  }
+
+  function esc(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function renderFlightCard(p) {
+    const route = esc(p.route.originCity || p.route.originCode) + " → " + esc(p.route.destCity || p.route.destCode);
+    const times = esc(p.departDate) + " · " + esc(p.departTime) + " - " + esc(p.arriveTime);
+    const tags = (p.tags || []).map((t) => '<span class="tag">' + esc(t) + "</span>").join("");
+    let legsHtml = "";
+    if (p.legs && p.legs.length) {
+      legsHtml =
+        '<div class="times">' +
+        p.legs
+          .map(
+            (l) =>
+              esc(l.flightNo || "") +
+              " " +
+              esc(l.originCode) +
+              "→" +
+              esc(l.destCode) +
+              " " +
+              esc(l.departTime || "") +
+              "-" +
+              esc(l.arriveTime || "")
+          )
+          .join(" · ") +
+        "</div>";
+    }
+    return (
+      '<div class="plan" data-offer-id="' +
+      esc(p.offerId) +
+      '" data-slot="' +
+      esc(p.slotKey) +
+      '">' +
+      '<p class="plan-title">' +
+      esc(p.slotTitle) +
+      "</p>" +
+      '<p class="plan-reason">' +
+      esc(p.recommendReason || "") +
+      "</p>" +
+      '<div class="flight-card">' +
+      '<div class="flight-row">' +
+      "<div>" +
+      '<div class="route">' +
+      route +
+      "</div>" +
+      '<div class="times">' +
+      times +
+      "</div>" +
+      legsHtml +
+      '<div class="tags">' +
+      tags +
+      "</div>" +
+      "</div>" +
+      '<div class="cabin-wrap">' +
+      '<div class="price">¥' +
+      esc(p.priceCny) +
+      "</div>" +
+      '<div class="cabin">' +
+      esc(p.cabinLabel || "") +
+      "</div>" +
+      "</div>" +
+      "</div>" +
+      "</div>" +
+      "</div>"
+    );
+  }
+
+  function renderCabinUpsell(payload, searchId) {
+    const notice = payload.missingDataNotice
+      ? '<div class="notice">' + esc(payload.missingDataNotice) + "</div>"
+      : "";
+    const acc = (payload.accordion || [])
+      .map((sec, idx) => {
+        const open = sec.defaultExpanded ? " open" : "";
+        const imgUrl = sanitizeImageUrl(sec.imageUrl);
+        const img = imgUrl ? '<img src="' + esc(imgUrl) + '" alt="' + esc(sec.title) + '" loading="lazy" />' : "";
+        const bullets =
+          (sec.bullets || []).length > 0
+            ? "<ul>" + sec.bullets.map((b) => "<li>" + esc(b) + "</li>").join("") + "</ul>"
+            : "";
+        return (
+          '<div class="acc-item">' +
+          '<button type="button" class="acc-head" data-acc="' +
+          idx +
+          '">' +
+          esc(sec.title) +
+          '<span>▼</span></button>' +
+          '<div class="acc-body' +
+          open +
+          '" id="acc-body-' +
+          idx +
+          '">' +
+          bullets +
+          img +
+          "</div>" +
+          "</div>"
+        );
+      })
+      .join("");
+
+    const href = esc(payload.cta && payload.cta.href ? payload.cta.href : "#");
+    const ctaLabel = esc((payload.cta && payload.cta.label) || "查看更多");
+
+    track("cabin_upsell_render", {
+      searchId: searchId || payload.searchId,
+      aircraftKey: payload.aircraftKey,
+      blockId: payload.id,
+    });
+
+    return (
+      '<div class="cabin-upsell" data-block-id="' +
+      esc(payload.id) +
+      '">' +
+      notice +
+      '<div class="accordion">' +
+      acc +
+      "</div>" +
+      '<a class="cta" href="' +
+      href +
+      '" target="_blank" rel="noopener" data-cta="cabin_more">' +
+      ctaLabel +
+      "</a>" +
+      "</div>"
+    );
+  }
+
+  function wireAccordion(root) {
+    root.querySelectorAll(".acc-head").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const idx = btn.getAttribute("data-acc");
+        const body = document.getElementById("acc-body-" + idx);
+        if (!body) return;
+        body.classList.toggle("open");
+        track("accordion_toggle", { idx: idx, open: body.classList.contains("open") });
+      });
+    });
+    root.querySelectorAll("a.cta").forEach((a) => {
+      a.addEventListener("click", () => {
+        track("cta_click", { href: a.getAttribute("href") });
+      });
+    });
+  }
+
+  function parseSseChunk(buffer, onEvent) {
+    const parts = buffer.split("\n\n");
+    const rest = parts.pop() || "";
+    for (const block of parts) {
+      let eventName = "message";
+      const dataLines = [];
+      for (const line of block.split("\n")) {
+        if (line.startsWith("event:")) eventName = line.slice(6).trim();
+        else if (line.startsWith("data:")) dataLines.push(line.slice(5).trim());
+      }
+      if (dataLines.length) {
+        try {
+          const data = JSON.parse(dataLines.join("\n"));
+          onEvent(eventName, data);
+        } catch (e) {
+          console.warn("bad sse json", e);
+        }
+      }
+    }
+    return rest;
+  }
+
+  async function runStream(userText) {
+    const err = document.getElementById("err");
+    const textEl = document.getElementById("text");
+    const blocksEl = document.getElementById("blocks");
+    err.hidden = true;
+    textEl.textContent = "";
+    blocksEl.innerHTML = "";
+    document.getElementById("log").textContent = "";
+
+    const params = new URLSearchParams({
+      query: userText,
+      origin: "HGH",
+      dest: "PKX",
+      date: "2025-04-06",
+    });
+    const url = "/api/stream?" + params.toString();
+
+    const res = await fetch(url);
+    if (!res.ok || !res.body) {
+      err.textContent = "请求失败（是否已启动 server？）HTTP " + res.status;
+      err.hidden = false;
+      return;
+    }
+
+    const reader = res.body.getReader();
+    const dec = new TextDecoder();
+    let buf = "";
+    let searchId = "";
+
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, { stream: true });
+      buf = parseSseChunk(buf, (ev, data) => {
+        if (ev === "message.delta" && data.type === "text") {
+          textEl.textContent += data.text || "";
+        }
+        if (ev === "message.block") {
+          if (data.blockType === "FlightCard") {
+            blocksEl.insertAdjacentHTML("beforeend", renderFlightCard(data.payload));
+            track("flight_card_exposure", {
+              slot: data.payload.slotKey,
+              offerId: data.payload.offerId,
+              searchId: data.payload.searchId,
+            });
+            searchId = data.payload.searchId || searchId;
+          }
+          if (data.blockType === "CabinUpsell") {
+            const wrap = document.createElement("div");
+            wrap.innerHTML = renderCabinUpsell(data.payload, searchId);
+            blocksEl.appendChild(wrap.firstElementChild);
+            wireAccordion(blocksEl);
+            track("cabin_upsell_exposure", {
+              blockId: data.payload.id,
+              searchId: data.payload.searchId || searchId,
+            });
+          }
+        }
+        if (ev === "message.done") {
+          searchId = data.searchId || searchId;
+          track("stream_done", { reason: data.reason, searchId });
+        }
+        if (ev === "analytics.beacon") {
+          track(data.name || "beacon", { searchId: data.searchId, props: data.props });
+        }
+      });
+    }
+    wireAccordion(blocksEl);
+  }
+
+  document.getElementById("go").addEventListener("click", () => {
+    runStream(document.getElementById("q").value.trim() || "帮我推荐到北京的机票");
+  });
+  document.getElementById("budget").addEventListener("click", () => {
+    document.getElementById("q").value = "我要最便宜的机票";
+    runStream(document.getElementById("q").value);
+  });
+})();
+  </script>
+</body>
+</html>
